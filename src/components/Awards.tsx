@@ -1,7 +1,15 @@
 import { Trophy, Award, Medal, Star } from 'lucide-react';
 
 export default function Awards() {
-  const awards = [
+  const awards: { year: number; title: string; icon: typeof Trophy; description: string; image?: string }[] = [
+    {
+      year: 2025,
+      title: 'Outstanding Student Chapter Award (Large)',
+      icon: Medal,
+      image: 'media/events/award-2025.jpg',
+      description:
+        'Presented by the IEEE Tunisia Section to the IEEE IIT CS SB Chapter for delivering excellent services to IEEE members (24 December 2025, Hammamet, Tunisia).',
+    },
     {
       year: 2024,
       title: 'Best student organization of the year',
@@ -50,13 +58,17 @@ export default function Awards() {
                 className="group bg-gradient-to-br from-blue-900/20 to-cyan-900/20 backdrop-blur-sm border border-blue-500/30 rounded-xl p-6 hover:border-blue-400/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 w-full sm:w-[22rem]"
               >
                 {/* Image above text - no cropping */}
-                {award.image && (
+                {award.image ? (
                   <div className="mb-4">
                     <img
                       src={award.image}
                       alt={award.title}
                       className="w-full h-auto object-contain rounded-lg border border-blue-500/20"
                     />
+                  </div>
+                ) : (
+                  <div className="mb-4 h-40 rounded-lg border-2 border-dashed border-blue-500/30 flex items-center justify-center text-gray-500 text-sm">
+                    Award photo
                   </div>
                 )}
 

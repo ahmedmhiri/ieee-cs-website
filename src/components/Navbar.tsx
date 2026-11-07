@@ -18,6 +18,7 @@ export default function Navbar() {
     { name: 'About', href: '#about' },
     { name: 'Awards', href: '#awards' },
     { name: 'Events', href: '#events' },
+    { name: 'Gallery', href: '#gallery' },
     { name: 'Our Team', href: '#team' },
     { name: 'Contact', href: '#contact' },
   ];

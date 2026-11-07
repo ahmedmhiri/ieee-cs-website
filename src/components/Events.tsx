@@ -1,7 +1,10 @@
-import { Calendar, MapPin, ArrowRight, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { Calendar, MapPin, ArrowRight, Clock, Image as ImageIcon, ChevronDown, ChevronUp } from 'lucide-react';
+import { events2026, type EventItem } from '../data/report';
 
 export default function Events() {
-  const events = [
+  const [showAll, setShowAll] = useState(false);
+  const earlierEvents: EventItem[] = [
     {
       title: 'Documentary Cinema',
       date: '28 Oct 2025 ',
@@ -64,6 +67,9 @@ export default function Events() {
     },
   ];
 
+  const allEvents = [...events2026, ...earlierEvents];
+  const events = showAll ? allEvents : allEvents.slice(0, 6);
+
   return (
     <section id="events" className="py-20 bg-slate-800 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-slate-900 to-transparent"></div>
@@ -86,11 +92,19 @@ export default function Events() {
               className="group bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/10"
             >
               <div className="relative h-48 overflow-hidden">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+                {event.image ? (
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    style={{ objectPosition: event.imagePosition }}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full border-b border-dashed border-blue-500/30 flex flex-col items-center justify-center text-gray-500 bg-slate-900/60">
+                    <ImageIcon className="w-8 h-8 mb-1" />
+                    <span className="text-sm">Photo</span>
+                  </div>
+                )}
                 <div className="absolute top-4 right-4">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -108,35 +122,68 @@ export default function Events() {
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
                   {event.title}
                 </h3>
-                <p className="text-gray-400 text-sm mb-4 line-clamp-2">{event.description}</p>
+                <p className="text-gray-400 text-sm mb-4 line-clamp-4">{event.description}</p>
 
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center text-gray-400 text-sm">
                     <Calendar className="w-4 h-4 mr-2 text-blue-400" />
                     {event.date}
                   </div>
-                  <div className="flex items-center text-gray-400 text-sm">
-                    <Clock className="w-4 h-4 mr-2 text-cyan-400" />
-                    {event.time}
-                  </div>
+                  {event.time && (
+                    <div className="flex items-center text-gray-400 text-sm">
+                      <Clock className="w-4 h-4 mr-2 text-cyan-400" />
+                      {event.time}
+                    </div>
+                  )}
                   <div className="flex items-center text-gray-400 text-sm">
                     <MapPin className="w-4 h-4 mr-2 text-blue-400" />
                     {event.location}
                   </div>
                 </div>
 
-                <a
-                  href={event.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/30 text-blue-400 rounded-lg hover:from-blue-500 hover:to-cyan-500 hover:text-white transition-all duration-300 group/btn"
-                >
-                  <span>View Details</span>
-                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </a>
+                {event.links && (
+                  <div className="mb-4">
+                    <div className="text-xs text-gray-500 mb-2">Sessions on vTools</div>
+                    <div className="flex flex-wrap gap-2">
+                      {event.links.map((l) => (
+                        <a
+                          key={l.url}
+                          href={l.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-2.5 py-1 text-xs rounded-full border border-blue-500/30 text-blue-400 hover:bg-blue-500 hover:text-white transition-colors"
+                        >
+                          {l.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {event.link && (
+                  <a
+                    href={event.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/30 text-blue-400 rounded-lg hover:from-blue-500 hover:to-cyan-500 hover:text-white transition-all duration-300 group/btn"
+                  >
+                    <span>View Details</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </a>
+                )}
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 text-blue-400 rounded-lg hover:from-blue-500/30 hover:to-cyan-500/30 transition-all duration-300"
+          >
+            <span>{showAll ? 'Show fewer events' : `Show all ${allEvents.length} events`}</span>
+            {showAll ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+          </button>
         </div>
       </div>
     </section>

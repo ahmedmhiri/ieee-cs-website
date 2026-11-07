@@ -1,4 +1,4 @@
-import { Cpu, Instagram, Linkedin, Mail, Globe, Heart } from 'lucide-react';
+import { Cpu, Instagram, Linkedin, Facebook, Mail, Globe, Heart } from 'lucide-react';
 
 export default function Footer() {
   const quickLinks = [
@@ -6,6 +6,7 @@ export default function Footer() {
     { name: 'About', href: '#about' },
     { name: 'Awards', href: '#awards' },
     { name: 'Events', href: '#events' },
+    { name: 'Gallery', href: '#gallery' },
     { name: 'Our Team', href: '#team' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -53,7 +54,16 @@ export default function Footer() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="sbc-iit-cs@ieee.org"
+                href="https://www.facebook.com/share/18qsGAC4sC/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="mailto:sbc-iit-cs@ieee.org"
                 className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300"
               >
                 <Mail className="w-5 h-5" />
@@ -95,7 +105,7 @@ export default function Footer() {
               </p>
               <p>
                 Email:{' '}
-                <a href="sbc-iit-cs@ieee.org" className="text-blue-400 hover:text-blue-300 transition-colors">
+                <a href="mailto:sbc-iit-cs@ieee.org" className="text-blue-400 hover:text-blue-300 transition-colors">
                   sbc-iit-cs@ieee.org
                 </a>
               </p>
@@ -106,7 +116,7 @@ export default function Footer() {
         <div className="border-t border-slate-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm">
-              © 2025 IEEE Computer Society IIT Student Branch Chapter. All rights reserved.
+              © 2026 IEEE Computer Society IIT Student Branch Chapter. All rights reserved.
             </div>
             {/*<div className="flex items-center space-x-1 text-gray-400 text-sm">
               <span>Made with</span>

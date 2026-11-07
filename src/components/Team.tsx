@@ -1,97 +1,50 @@
-import { useState } from 'react';
-import { Linkedin, ChevronDown, ChevronUp } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 
 export default function Team() {
-  const [showPrevious, setShowPrevious] = useState(false);
-
-  const currentTeam = [
-    {
-      name: 'Mohamed Zouari',
-      position: 'CS SB Chair',
-      image: 'chair.JPG',
-      linkedin: 'https://www.linkedin.com/in/mohamedzouari202/',
-    },
-    {
-      name: 'Bassem Moalla',
-      position: 'CS SB Vice-Chair',
-      image: 'viceweb.jpg',
-      linkedin: 'https://www.linkedin.com/in/bassem-moalla-b0266b2ab/',
-    },
-    {
-      name: 'Amel Ben Ameur',
-      position: 'CS SB Vice-Chair',
-      image: 'vice.jpg',
-      linkedin: 'https://www.linkedin.com/in/amel-ben-ameur-707509226/',
-    },
-    {
-      name: 'Lina Mallouli',
-      position: 'CS SB Secretary',
-      image: 'sec.jpg',
-      linkedin: 'https://www.linkedin.com/in/lina-mallouli-a16a37176/',
-    },
-    {
-      name: 'Yessine Louati',
-      position: 'CS SB Treasurer',
-      image: 'treso.jpg',
-      linkedin: 'https://www.linkedin.com/in/mouhamed-yessine-louati-047254330/',
-    },
+  // Executive board 2025-2026, from the annual report.
+  // Add `image` (file in /public) and `linkedin` for anyone who is missing them.
+  type Member = { name: string; position: string; image?: string; linkedin?: string };
+  const currentTeam: Member[] = [
     {
       name: 'Youssef Sahnoun',
-      position: 'CS SB Webmaster',
-      image: 'web.jpg',
+      position: 'CS SB Chair',
+      image: 'team/youssef-sahnoun.jpg',
       linkedin: 'https://www.linkedin.com/in/youssef-sahnoun-74500b174/',
     },
+    { name: 'Emna Ammar', position: 'CS SB Vice-Chair', image: 'team/emna-ammar.jpg' },
     {
-      name: 'Hamza Maalej',
-      position: 'CS SB Project-Manager',
-      image: 'PM.jpg',
-      linkedin: 'https://www.linkedin.com/in/hamza-maalej-21815b35b/',
-    },
-  ];
-
-  const previousTeam = [
-    {
-      name: 'Rabie Becha',
-      position: 'CS SB Chair',
-      image: 'chair5.jpg',
-      linkedin: 'https://www.linkedin.com/in/mohamed-rabie-becha-a06418334/',
-    },
-    {
-      name: 'Ayoub Bougacha',
+      name: 'Amel BenAmeur',
       position: 'CS SB Vice-Chair',
-      image: 'vice5.jpg',
-      linkedin: 'https://www.linkedin.com/in/bougacha-ayoub-b18bba29a/',
+      image: 'team/amel-benameur.jpg',
+      linkedin: 'https://www.linkedin.com/in/amel-ben-ameur-707509226/',
     },
-    {
-      name: 'Sirine Ben Hassouna',
-      position: 'CS SB Secretary',
-      image: 'sec5.jpg',
-      linkedin: 'https://www.linkedin.com/in/sirine-benhassouna-a89baa2aa/m',
-    },
-    {
-      name: 'Mahdi  Bouassida',
-      position: 'CS SB Treasurer',
-      image: 'treso5.jpg',
-      linkedin: 'https://www.linkedin.com/in/mahdi-bouassida789/',
-    },
-    {
-      name: 'Bassem Moalla',
-      position: 'CS SB Webmaster',
-      image: 'viceweb.jpg',
-      linkedin: 'https://www.linkedin.com/in/bassem-moalla-b0266b2ab/',
-    },
+    { name: 'Zina Ammar', position: 'CS SB Secretary', image: 'team/zina-ammar.jpg' },
+    { name: 'Mouhamed Louati', position: 'CS SB Treasurer', image: 'team/mouhamed-louati.jpg' },
+    { name: 'Ahmed Mhiri', position: 'CS SB Webmaster', image: 'team/ahmed-mhiri.jpg' },
+    { name: 'Yesmine Besbes', position: 'CS SB Webmaster', image: 'team/yesmine-besbes.jpg' },
+    { name: 'Mohamed Chaabouni', position: 'CS SB Webmaster', image: 'team/mohamed-chaabouni.jpg' },
   ];
 
-  const TeamCard = ({ member, isPrevious = false }: { member: typeof currentTeam[0], isPrevious?: boolean }) => (
-    <div className={`group relative ${isPrevious ? 'opacity-75' : ''}`}>
+  const initials = (name: string) =>
+    name.split(' ').filter(Boolean).slice(0, 2).map((p) => p[0]).join('').toUpperCase();
+
+  const TeamCard = ({ member }: { member: Member }) => (
+    <div className="group relative">
       <div className="relative bg-gradient-to-br from-blue-900/20 to-cyan-900/20 backdrop-blur-sm border border-blue-500/30 rounded-xl overflow-hidden hover:border-blue-400/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20">
         <div className="aspect-square overflow-hidden">
-          <img
-            src={member.image}
-            alt={member.name}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-          />
+          {member.image ? (
+            <img
+              src={member.image}
+              alt={member.name}
+              className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-cyan-500/20 text-6xl font-bold text-blue-300">
+              {initials(member.name)}
+            </div>
+          )}
         </div>
+        {member.linkedin && (
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
           <div className="p-6 w-full">
             <a
@@ -104,6 +57,7 @@ export default function Team() {
             </a>
           </div>
         </div>
+        )}
       </div>
       <div className="mt-4 text-center">
         <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
@@ -137,29 +91,6 @@ export default function Team() {
             ))}
           </div>
         </div>
-
-        <div className="text-center">
-          <button
-            onClick={() => setShowPrevious(!showPrevious)}
-            className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 text-blue-400 rounded-lg hover:from-blue-500/30 hover:to-cyan-500/30 transition-all duration-300"
-          >
-            <span>{showPrevious ? 'Hide' : 'Show'} Previous Committee (2024-2025)</span>
-            {showPrevious ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-          </button>
-        </div>
-
-        {showPrevious && (
-          <div className="mt-16 animate-fade-in">
-            <h3 className="text-3xl font-bold text-white/80 text-center mb-10">
-              Executive Committee 2024-2025
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {previousTeam.map((member, index) => (
-                <TeamCard key={index} member={member} isPrevious />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Users, Award, Calendar, TrendingUp } from 'lucide-react';
+import { stats } from '../data/report';
 
 export default function About() {
   const [counts, setCounts] = useState({ members: 0, events: 0, workshops: 0, years: 0 });
@@ -7,10 +8,10 @@ export default function About() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const targetCounts = {
-    members: 45,
-    events: 5,
-    workshops: 10,
-    years: 2,
+    members: stats.members,
+    events: stats.activities,
+    workshops: stats.attendances,
+    years: stats.years,
   };
 
   useEffect(() => {
@@ -73,7 +74,7 @@ export default function About() {
           <div className="space-y-6">
             <h3 className="text-3xl font-bold text-white">Who We Are</h3>
             <p className="text-gray-300 leading-relaxed text-lg">
-              The IEEE Computer Society Student Branch Chapter at IIT is a vibrant community of technology enthusiasts, innovators, and future leaders in computer science and engineering.
+              The IEEE Computer Society Student Branch Chapter at IIT is a vibrant community of technology enthusiasts, innovators, and future leaders in computer science and engineering. Founded on 14 May 2024.
             </p>
             <p className="text-gray-300 leading-relaxed text-lg">
               We strive to create a platform for students to explore cutting-edge technologies, develop technical skills, and connect with industry professionals through workshops, competitions, and collaborative projects.
@@ -95,20 +96,20 @@ export default function About() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 backdrop-blur-sm border border-blue-500/20 rounded-xl p-6 text-center hover:scale-105 transition-transform duration-300">
             <Users className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-            <div className="text-4xl font-bold text-white mb-2">{counts.members}+</div>
-            <div className="text-gray-400">Active Members</div>
+            <div className="text-4xl font-bold text-white mb-2">{counts.members}</div>
+            <div className="text-gray-400">IEEE CS Members</div>
           </div>
 
           <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6 text-center hover:scale-105 transition-transform duration-300">
             <Calendar className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
-            <div className="text-4xl font-bold text-white mb-2">{counts.events}+</div>
-            <div className="text-gray-400">Events Organized</div>
+            <div className="text-4xl font-bold text-white mb-2">{counts.events}</div>
+            <div className="text-gray-400">Activities in 2026</div>
           </div>
 
           <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 backdrop-blur-sm border border-blue-500/20 rounded-xl p-6 text-center hover:scale-105 transition-transform duration-300">
             <Award className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-            <div className="text-4xl font-bold text-white mb-2">{counts.workshops}+</div>
-            <div className="text-gray-400">Workshops</div>
+            <div className="text-4xl font-bold text-white mb-2">{counts.workshops.toLocaleString('en-US')}</div>
+            <div className="text-gray-400">Total Attendances</div>
           </div>
 
           <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6 text-center hover:scale-105 transition-transform duration-300">

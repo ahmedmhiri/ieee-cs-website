@@ -48,12 +48,15 @@ export default function Hero() {
 
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMwLTkuOTQtOC4wNi0xOC0xOC0xOCIgc3Ryb2tlPSJyZ2JhKDU5LCAxMzAsIDI0NiwgMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9nPjwvc3ZnPg==')] opacity-20"></div>
 
+      <div className="hero-blob w-[28rem] h-[28rem] bg-blue-500 -top-24 -left-24"></div>
+      <div className="hero-blob w-[32rem] h-[32rem] bg-cyan-500 -bottom-32 -right-24" style={{ animationDelay: '-6s' }}></div>
+
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        <div className="observe-animate opacity-0">
+        <div className="hero-rise">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             IEEE Computer Society
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 animate-shimmer">
               IIT Student Branch Chapter 
             </span>
           </h1>
@@ -66,7 +69,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105"
+              className="px-8 py-4 bg-gold-500 hover:bg-gold-400 text-black rounded-lg font-semibold hover:shadow-lg hover:shadow-gold-500/40 transition-all duration-300 hover:scale-105"
             >
               Discover More
             </button>

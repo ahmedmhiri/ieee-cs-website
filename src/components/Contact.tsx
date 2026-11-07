@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, MapPin, Instagram, Linkedin, Send } from 'lucide-react';
+import { Mail, MapPin, Instagram, Linkedin, Facebook, Send } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -82,6 +82,15 @@ export default function Contact() {
                     className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300"
                   >
                     <Linkedin className="w-6 h-6 text-white" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/share/18qsGAC4sC/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300"
+                  >
+                    <Facebook className="w-6 h-6 text-white" />
                   </a>
                 </div>
               </div>
